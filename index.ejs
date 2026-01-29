@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wedding Invitation | Save The Date</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Playfair+Display:ital,wght@0,400;1,700&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/main.css">
+</head>
+<body>
+
+    <section class="hero">
+        <h2>We Are Getting Married</h2>
+        <h1>Sayantan & Ria</h1>
+        <p>Save the Date: February 27, 2026</p>
+        
+        <div id="countdown">
+    <div class="time-box"><span id="days">00</span>Days</div>
+    <div class="time-box"><span id="hours">00</span>Hrs</div>
+    <div class="time-box"><span id="mins">00</span>Mins</div>
+    <div class="time-box pulse"><span id="secs">00</span>Secs</div>
+</div>
+    </section>
+
+    <section class="details reveal">
+        <h3>The Reception</h3>
+        <p>Please join us for a night of dinner, dancing and entertain yourself!</p>
+        <br>
+        <p><strong>Where:</strong> Subhodrishti, Indraprastha</p>
+        <p><strong>When:</strong> 7:00 PM onwards</p>
+        <br>
+        <div style="border: 1px solid var(--gold); padding: 20px; display: inline-block;">
+            <p>Formal Attire Requested</p>
+        </div>
+    </section>
+
+    <!-- <section class="rsvp-section reveal">
+        <h3>Will You Attend?</h3>
+        <p style="margin-bottom: 30px;">Please RSVP by June 1st, 2026</p>
+        
+        <form id="rsvpForm">
+            <input type="text" id="name" placeholder="Your Full Name" required>
+            <select id="attendance">
+                <option value="yes">Joyfully Accept</option>
+                <option value="no">Regretfully Decline</option>
+            </select>
+            <input type="number" id="guests" placeholder="Number of Guests" min="1" max="5">
+            <button type="submit">Send Invitation Response</button>
+        </form>
+        <div id="thankYou" style="display:none; margin-top: 20px; color: var(--gold); font-weight: bold;">
+            Thank you! Your response has been sent.
+        </div>
+    </section> -->
+
+    <footer style="padding: 40px; font-size: 0.8rem; opacity: 0.7;">
+        Made with Love &bull; 2026
+    </footer>
+
+    <script>
+        // --- Countdown Timer ---
+        // --- Updated Countdown Timer with Seconds ---
+const weddingDate = new Date("February 27, 2026 19:00:00").getTime();
+
+const timer = setInterval(function() {
+    const now = new Date().getTime();
+    const distance = weddingDate - now;
+
+    // Calculations for days, hours, minutes and seconds
+    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+    // Display the result
+    document.getElementById("days").innerHTML = days.toString().padStart(2, '0');
+    document.getElementById("hours").innerHTML = hours.toString().padStart(2, '0');
+    document.getElementById("mins").innerHTML = minutes.toString().padStart(2, '0');
+    document.getElementById("secs").innerHTML = seconds.toString().padStart(2, '0');
+
+    // If the count down is finished
+    if (distance < 0) {
+        clearInterval(timer);
+        document.getElementById("countdown").innerHTML = "<h1>IT'S CELEBRATION TIME!</h1>";
+    }
+}, 1000);
+
+        // --- Scroll Reveal Animation ---
+        window.addEventListener('scroll', () => {
+            const reveals = document.querySelectorAll('.reveal');
+            reveals.forEach(el => {
+                const windowHeight = window.innerHeight;
+                const revealTop = el.getBoundingClientRect().top;
+                if (revealTop < windowHeight - 150) {
+                    el.classList.add('active');
+                }
+            });
+        });
+
+        // --- RSVP Form Handling ---
+        document.getElementById('rsvpForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const name = document.getElementById('name').value;
+            
+            // In a real app, you'd use fetch() to send this to a database
+            console.log("RSVP Received from:", name);
+            
+            this.style.display = 'none';
+            document.getElementById('thankYou').style.display = 'block';
+        });
+    </script>
+</body>
+</html>
