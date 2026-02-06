@@ -12,10 +12,20 @@ app.get('/',(req,res)=>{
     res.render('index.ejs')
 })
 
+app.get('/r', (req,res)=>{
+    res.render('indexRiya.ejs')
+})
+
 app.get('/:name/', (req, res) => {
     const { name }= req.params; 
     const fname = name.trim().split("-").join(" ").toUpperCase()
     res.render('invite.ejs', {usrName : fname})
+});
+
+app.get('/r/:name/', (req, res) => {
+    const { name }= req.params; 
+    const fname = name.trim().split("-").join(" ").toUpperCase()
+    res.render('inviteRiya.ejs', {usrName : fname})
 });
 
 app.get(/(.*)/,(req,res)=>{
